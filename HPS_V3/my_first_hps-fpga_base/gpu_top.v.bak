@@ -1,0 +1,73 @@
+module gpu_top (
+    input  wire        clk,
+    input  wire        reset,
+    input  wire        fim_de_quadro, // V-Blank
+
+    // Pinos do Barramento Avalon-MM (O ARM escreve aqui)
+    input  wire [1:0]  avs_address,
+    input  wire [31:0] avs_writedata,
+    input  wire        avs_write,
+    input  wire        avs_read,
+    output wire [31:0] avs_readdata,
+
+    // Saídas que vão para o seu background_renderer.v
+    output wire [8:0]  bg_scroll_x,
+    output wire [7:0]  bg_scroll_y,
+    output wire [7:0]  bg_color
+);
+
+    // ========================================================
+    // FIOS INTERNOS (Para ligar a FIFO no Decodificador)
+    // ========================================================
+    wire [31:0] fifo_q;       // Dado saindo da FIFO
+    wire        fifo_rdreq;   // Sinal de leitura gerado pelo decodificador
+    wire        fifo_empty;   // Sinal de FIFO vazia
+    wire        fifo_full;    // Sinal de FIFO cheia
+
+    // ========================================================
+    // PEÇA 1: A FIFO (Instanciada do IP Catalog)
+    // O Avalon escreve nela, o Decodificador lê dela.
+    // ========================================================
+    fifo_32bits u_fifo (
+        .clock (clk),
+        .sclr  (reset),
+        
+        // Lado da Escrita (Ligado direto no ARM/Avalon)
+        .data  (avs_writedata),
+        .wrreq (avs_write & (avs_address == 2'b00)), // Escreve se o ARM mandar um WRITE no offset 0
+        .full  (fifo_full),
+        
+        // Lado da Leitura (Ligado no Decodificador)
+        .q     (fifo_q),
+        .rdreq (fifo_rdreq),
+        .empty (fifo_empty)
+    );
+
+    // ========================================================
+    // LÓGICA DO STATUS (Para o ARM saber se a GPU está ocupada)
+    // ========================================================
+    // Se o ARM ler o endereço 01 (REG_STATUS), nós mandamos as flags.
+    // Bit 0 (BUSY) = FIFO Cheia. Bit 1 (DONE) = FIFO Vazia.
+    assign avs_readdata = (avs_read && avs_address == 2'b01) ? {30'd0, fifo_empty, fifo_full} : 32'd0;
+
+    // ========================================================
+    // PEÇA 2: O DECODIFICADOR MVP 
+    // Lê a FIFO e manda os valores para o Background.
+    // ========================================================
+    mvp_interface_bg u_decodificador (
+        .clk           (clk),
+        .reset         (reset),
+        .fim_de_quadro (fim_de_quadro),
+        
+        // Sinais ligados na saída da FIFO
+        .fifo_dout     (fifo_q),
+        .fifo_empty    (fifo_empty),
+        .fifo_rd_en    (fifo_rdreq),
+        
+        // Sinais que saem do gpu_top e vão para o renderizador
+        .bg_scroll_x   (bg_scroll_x),
+        .bg_scroll_y   (bg_scroll_y),
+        .bg_color      (bg_color)
+    );
+
+endmodule

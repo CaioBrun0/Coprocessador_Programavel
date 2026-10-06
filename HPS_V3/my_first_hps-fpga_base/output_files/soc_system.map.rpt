@@ -1,0 +1,470 @@
+Analysis & Synthesis report for soc_system
+Mon Oct  5 20:13:07 2026
+Quartus Prime Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Messages
+  6. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2023  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                 ;
++-----------------------------+------------------------------------------------+
+; Analysis & Synthesis Status ; Failed - Mon Oct  5 20:13:07 2026              ;
+; Quartus Prime Version       ; 23.1std.0 Build 991 11/28/2023 SC Lite Edition ;
+; Revision Name               ; soc_system                                     ;
+; Top-level Entity Name       ; ghrd_top                                       ;
+; Family                      ; Cyclone V                                      ;
+; Logic utilization (in ALMs) ; N/A until Partition Merge                      ;
+; Total registers             ; N/A until Partition Merge                      ;
+; Total pins                  ; N/A until Partition Merge                      ;
+; Total virtual pins          ; N/A until Partition Merge                      ;
+; Total block memory bits     ; N/A until Partition Merge                      ;
+; Total PLLs                  ; N/A until Partition Merge                      ;
+; Total DLLs                  ; N/A until Partition Merge                      ;
++-----------------------------+------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                             ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; 5CSEMA5F31C6       ;                    ;
+; Top-level entity name                                                           ; ghrd_top           ; soc_system         ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; Use smart compilation                                                           ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Preserve fewer node names                                                       ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 12          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 23.1std.0 Build 991 11/28/2023 SC Lite Edition
+    Info: Processing started: Mon Oct  5 20:12:53 2026
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off soc_system -c soc_system
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_sysid_qsys.v
+    Info (12023): Found entity 1: soc_system_sysid_qsys File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_sysid_qsys.v Line: 34
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_onchip_memory2_0.v
+    Info (12023): Found entity 1: soc_system_onchip_memory2_0 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_onchip_memory2_0.v Line: 21
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_1_rsp_mux.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_1_rsp_mux File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_1_rsp_mux.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_1_rsp_demux.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_1_rsp_demux File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_1_rsp_demux.sv Line: 43
+Info (12021): Found 2 design units, including 2 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_1_router_001.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_1_router_001_default_decode File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_1_router_001.sv Line: 45
+    Info (12023): Found entity 2: soc_system_mm_interconnect_1_router_001 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_1_router_001.sv Line: 84
+Info (12021): Found 2 design units, including 2 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_1_router.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_1_router_default_decode File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_1_router.sv Line: 45
+    Info (12023): Found entity 2: soc_system_mm_interconnect_1_router File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_1_router.sv Line: 84
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_1_cmd_mux.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_1_cmd_mux File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_1_cmd_mux.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_1_cmd_demux.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_1_cmd_demux File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_1_cmd_demux.sv Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_1.v
+    Info (12023): Found entity 1: soc_system_mm_interconnect_1 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_1.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_mux_003.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_rsp_mux_003 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_mux_003.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_mux_002.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_rsp_mux_002 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_mux_002.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_mux.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_rsp_mux File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_mux.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_demux_004.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_rsp_demux_004 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_demux_004.sv Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_demux_002.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_rsp_demux_002 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_demux_002.sv Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_demux_001.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_rsp_demux_001 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_demux_001.sv Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_demux.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_rsp_demux File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_rsp_demux.sv Line: 43
+Info (12021): Found 2 design units, including 2 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_009.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_router_009_default_decode File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_009.sv Line: 45
+    Info (12023): Found entity 2: soc_system_mm_interconnect_0_router_009 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_009.sv Line: 84
+Info (12021): Found 2 design units, including 2 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_007.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_router_007_default_decode File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_007.sv Line: 45
+    Info (12023): Found entity 2: soc_system_mm_interconnect_0_router_007 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_007.sv Line: 84
+Info (12021): Found 2 design units, including 2 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_006.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_router_006_default_decode File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_006.sv Line: 45
+    Info (12023): Found entity 2: soc_system_mm_interconnect_0_router_006 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_006.sv Line: 84
+Info (12021): Found 2 design units, including 2 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_005.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_router_005_default_decode File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_005.sv Line: 45
+    Info (12023): Found entity 2: soc_system_mm_interconnect_0_router_005 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_005.sv Line: 84
+Info (12021): Found 2 design units, including 2 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_003.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_router_003_default_decode File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_003.sv Line: 45
+    Info (12023): Found entity 2: soc_system_mm_interconnect_0_router_003 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_003.sv Line: 84
+Info (12021): Found 2 design units, including 2 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_002.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_router_002_default_decode File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_002.sv Line: 45
+    Info (12023): Found entity 2: soc_system_mm_interconnect_0_router_002 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router_002.sv Line: 84
+Info (12021): Found 2 design units, including 2 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_router_default_decode File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router.sv Line: 45
+    Info (12023): Found entity 2: soc_system_mm_interconnect_0_router File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_router.sv Line: 84
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_mux_004.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_cmd_mux_004 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_mux_004.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_mux_002.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_cmd_mux_002 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_mux_002.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_mux_001.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_cmd_mux_001 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_mux_001.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_mux.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_cmd_mux File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_mux.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_demux_003.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_cmd_demux_003 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_demux_003.sv Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_demux_002.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_cmd_demux_002 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_demux_002.sv Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_demux.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_cmd_demux File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_cmd_demux.sv Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_avalon_st_adapter_error_adapter_0.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_avalon_st_adapter_error_adapter_0 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_avalon_st_adapter_error_adapter_0.sv Line: 66
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_avalon_st_adapter_001_error_adapter_0.sv
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_avalon_st_adapter_001_error_adapter_0 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_avalon_st_adapter_001_error_adapter_0.sv Line: 66
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_avalon_st_adapter_001.v
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_avalon_st_adapter_001 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_avalon_st_adapter_001.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0_avalon_st_adapter.v
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0_avalon_st_adapter File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0_avalon_st_adapter.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_mm_interconnect_0.v
+    Info (12023): Found entity 1: soc_system_mm_interconnect_0 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_mm_interconnect_0.v Line: 9
+Info (12021): Found 5 design units, including 5 entities, in source file soc_system/synthesis/submodules/soc_system_jtag_uart.v
+    Info (12023): Found entity 1: soc_system_jtag_uart_sim_scfifo_w File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_jtag_uart.v Line: 21
+    Info (12023): Found entity 2: soc_system_jtag_uart_scfifo_w File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_jtag_uart.v Line: 78
+    Info (12023): Found entity 3: soc_system_jtag_uart_sim_scfifo_r File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_jtag_uart.v Line: 164
+    Info (12023): Found entity 4: soc_system_jtag_uart_scfifo_r File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_jtag_uart.v Line: 243
+    Info (12023): Found entity 5: soc_system_jtag_uart File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_jtag_uart.v Line: 331
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_irq_mapper_001.sv
+    Info (12023): Found entity 1: soc_system_irq_mapper_001 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_irq_mapper_001.sv Line: 31
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_irq_mapper.sv
+    Info (12023): Found entity 1: soc_system_irq_mapper File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_irq_mapper.sv Line: 31
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_hps_0_hps_io_border.sv
+    Info (12023): Found entity 1: soc_system_hps_0_hps_io_border File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_hps_0_hps_io_border.sv Line: 14
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_hps_0_hps_io.v
+    Info (12023): Found entity 1: soc_system_hps_0_hps_io File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_hps_0_hps_io.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_hps_0_fpga_interfaces.sv
+    Info (12023): Found entity 1: soc_system_hps_0_fpga_interfaces File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_hps_0_fpga_interfaces.sv Line: 14
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_hps_0.v
+    Info (12023): Found entity 1: soc_system_hps_0 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_hps_0.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_fpga_only_master_timing_adt.sv
+    Info (12023): Found entity 1: soc_system_fpga_only_master_timing_adt File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_fpga_only_master_timing_adt.sv Line: 60
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_fpga_only_master_p2b_adapter.sv
+    Info (12023): Found entity 1: soc_system_fpga_only_master_p2b_adapter File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_fpga_only_master_p2b_adapter.sv Line: 55
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_fpga_only_master_b2p_adapter.sv
+    Info (12023): Found entity 1: soc_system_fpga_only_master_b2p_adapter File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_fpga_only_master_b2p_adapter.sv Line: 55
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/soc_system_fpga_only_master.v
+    Info (12023): Found entity 1: soc_system_fpga_only_master File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/soc_system_fpga_only_master.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/mvp_interface_bg.v
+    Info (12023): Found entity 1: mvp_interface_bg File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/mvp_interface_bg.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/intr_capturer.v
+    Info (12023): Found entity 1: intr_capturer File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/intr_capturer.v Line: 13
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_pll.sv
+    Info (12023): Found entity 1: hps_sdram_pll File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_pll.sv Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0_reset_sync.v
+    Info (12023): Found entity 1: hps_sdram_p0_reset_sync File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0_reset_sync.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0_reset.v
+    Info (12023): Found entity 1: hps_sdram_p0_reset File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0_reset.v Line: 18
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0_phy_csr.sv
+    Info (12023): Found entity 1: hps_sdram_p0_phy_csr File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0_phy_csr.sv Line: 31
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0_iss_probe.v
+    Info (12023): Found entity 1: hps_sdram_p0_iss_probe File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0_iss_probe.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0_generic_ddio.v
+    Info (12023): Found entity 1: hps_sdram_p0_generic_ddio File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0_generic_ddio.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0_clock_pair_generator.v
+    Info (12023): Found entity 1: hps_sdram_p0_clock_pair_generator File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0_clock_pair_generator.v Line: 29
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0_altdqdqs.v
+    Info (12023): Found entity 1: hps_sdram_p0_altdqdqs File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0_altdqdqs.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0_acv_ldc.v
+    Info (12023): Found entity 1: hps_sdram_p0_acv_ldc File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0_acv_ldc.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0_acv_hard_memphy.v
+    Info (12023): Found entity 1: hps_sdram_p0_acv_hard_memphy File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0_acv_hard_memphy.v Line: 21
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0_acv_hard_io_pads.v
+    Info (12023): Found entity 1: hps_sdram_p0_acv_hard_io_pads File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0_acv_hard_io_pads.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0_acv_hard_addr_cmd_pads.v
+    Info (12023): Found entity 1: hps_sdram_p0_acv_hard_addr_cmd_pads File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0_acv_hard_addr_cmd_pads.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram_p0.sv
+    Info (12023): Found entity 1: hps_sdram_p0 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram_p0.sv Line: 18
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/hps_sdram.v
+    Info (12023): Found entity 1: hps_sdram File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/hps_sdram.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/gpu_top.v
+    Info (12023): Found entity 1: gpu_top File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/gpu_top.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/fifo_32bits.v
+    Info (12023): Found entity 1: fifo_32bits File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/fifo_32bits.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_wrap_burst_converter.sv
+    Info (12023): Found entity 1: altera_wrap_burst_converter File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_wrap_burst_converter.sv Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_std_synchronizer_nocut.v
+    Info (12023): Found entity 1: altera_std_synchronizer_nocut File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_std_synchronizer_nocut.v Line: 44
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_reset_synchronizer.v
+    Info (12023): Found entity 1: altera_reset_synchronizer File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_reset_synchronizer.v Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_reset_controller.v
+    Info (12023): Found entity 1: altera_reset_controller File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_reset_controller.v Line: 42
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_width_adapter.sv
+    Info (12023): Found entity 1: altera_merlin_width_adapter File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_width_adapter.sv Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_traffic_limiter.sv
+    Info (12023): Found entity 1: altera_merlin_traffic_limiter File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_traffic_limiter.sv Line: 49
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_slave_translator.sv
+    Info (12023): Found entity 1: altera_merlin_slave_translator File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_slave_translator.sv Line: 35
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_slave_agent.sv
+    Info (12023): Found entity 1: altera_merlin_slave_agent File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_slave_agent.sv Line: 34
+Info (12021): Found 2 design units, including 2 entities, in source file soc_system/synthesis/submodules/altera_merlin_reorder_memory.sv
+    Info (12023): Found entity 1: altera_merlin_reorder_memory File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_reorder_memory.sv Line: 28
+    Info (12023): Found entity 2: memory_pointer_controller File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_reorder_memory.sv Line: 185
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_master_translator.sv
+    Info (12023): Found entity 1: altera_merlin_master_translator File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_master_translator.sv Line: 32
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_master_agent.sv
+    Info (12023): Found entity 1: altera_merlin_master_agent File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_master_agent.sv Line: 28
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+    Info (12023): Found entity 1: altera_merlin_burst_uncompressor File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_burst_uncompressor.sv Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_burst_adapter_uncmpr.sv
+    Info (12023): Found entity 1: altera_merlin_burst_adapter_uncompressed_only File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_burst_adapter_uncmpr.sv Line: 39
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_burst_adapter_new.sv
+    Info (12023): Found entity 1: altera_merlin_burst_adapter_new File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_burst_adapter_new.sv Line: 25
+Info (12021): Found 5 design units, including 5 entities, in source file soc_system/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv
+    Info (12023): Found entity 1: altera_merlin_burst_adapter_burstwrap_increment File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv Line: 40
+    Info (12023): Found entity 2: altera_merlin_burst_adapter_adder File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv Line: 55
+    Info (12023): Found entity 3: altera_merlin_burst_adapter_subtractor File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv Line: 77
+    Info (12023): Found entity 4: altera_merlin_burst_adapter_min File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv Line: 98
+    Info (12023): Found entity 5: altera_merlin_burst_adapter_13_1 File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv Line: 264
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_burst_adapter.sv
+    Info (12023): Found entity 1: altera_merlin_burst_adapter File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_burst_adapter.sv Line: 21
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_axi_slave_ni.sv
+    Info (12023): Found entity 1: altera_merlin_axi_slave_ni File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_axi_slave_ni.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_axi_master_ni.sv
+    Info (12023): Found entity 1: altera_merlin_axi_master_ni File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_axi_master_ni.sv Line: 27
+Info (12021): Found 2 design units, including 2 entities, in source file soc_system/synthesis/submodules/altera_merlin_arbitrator.sv
+    Info (12023): Found entity 1: altera_merlin_arbitrator File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv Line: 103
+    Info (12023): Found entity 2: altera_merlin_arb_adder File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_arbitrator.sv Line: 228
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_merlin_address_alignment.sv
+    Info (12023): Found entity 1: altera_merlin_address_alignment File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_merlin_address_alignment.sv Line: 26
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_mem_if_oct_cyclonev.sv
+    Info (12023): Found entity 1: altera_mem_if_oct_cyclonev File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_mem_if_oct_cyclonev.sv Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_mem_if_hhp_qseq_synth_top.v
+    Info (12023): Found entity 1: altera_mem_if_hhp_qseq_synth_top File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_mem_if_hhp_qseq_synth_top.v Line: 15
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_mem_if_hard_memory_controller_top_cyclonev.sv
+    Info (12023): Found entity 1: altera_mem_if_hard_memory_controller_top_cyclonev File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_mem_if_hard_memory_controller_top_cyclonev.sv Line: 18
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_mem_if_dll_cyclonev.sv
+    Info (12023): Found entity 1: altera_mem_if_dll_cyclonev File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_mem_if_dll_cyclonev.sv Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_jtag_streaming.v
+    Info (12023): Found entity 1: altera_jtag_streaming File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_jtag_streaming.v Line: 18
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_jtag_sld_node.v
+    Info (12023): Found entity 1: altera_jtag_sld_node File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_jtag_sld_node.v Line: 17
+Info (12021): Found 3 design units, including 3 entities, in source file soc_system/synthesis/submodules/altera_jtag_dc_streaming.v
+    Info (12023): Found entity 1: altera_jtag_control_signal_crosser File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_jtag_dc_streaming.v Line: 30
+    Info (12023): Found entity 2: altera_jtag_src_crosser File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_jtag_dc_streaming.v Line: 72
+    Info (12023): Found entity 3: altera_jtag_dc_streaming File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_jtag_dc_streaming.v Line: 135
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_incr_burst_converter.sv
+    Info (12023): Found entity 1: altera_incr_burst_converter File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_incr_burst_converter.sv Line: 28
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_default_burst_converter.sv
+    Info (12023): Found entity 1: altera_default_burst_converter File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_default_burst_converter.sv Line: 30
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_st_pipeline_stage.sv
+    Info (12023): Found entity 1: altera_avalon_st_pipeline_stage File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_st_pipeline_stage.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_st_pipeline_base.v
+    Info (12023): Found entity 1: altera_avalon_st_pipeline_base File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_st_pipeline_base.v Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_st_packets_to_bytes.v
+    Info (12023): Found entity 1: altera_avalon_st_packets_to_bytes File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_st_packets_to_bytes.v Line: 19
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_st_jtag_interface.v
+    Info (12023): Found entity 1: altera_avalon_st_jtag_interface File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_st_jtag_interface.v Line: 20
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_st_idle_remover.v
+    Info (12023): Found entity 1: altera_avalon_st_idle_remover File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_st_idle_remover.v Line: 19
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_st_idle_inserter.v
+    Info (12023): Found entity 1: altera_avalon_st_idle_inserter File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_st_idle_inserter.v Line: 19
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_st_clock_crosser.v
+    Info (12023): Found entity 1: altera_avalon_st_clock_crosser File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_st_clock_crosser.v Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_st_bytes_to_packets.v
+    Info (12023): Found entity 1: altera_avalon_st_bytes_to_packets File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_st_bytes_to_packets.v Line: 19
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_sc_fifo.v
+    Info (12023): Found entity 1: altera_avalon_sc_fifo File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_sc_fifo.v Line: 21
+Info (12021): Found 7 design units, including 7 entities, in source file soc_system/synthesis/submodules/altera_avalon_packets_to_master.v
+    Info (12023): Found entity 1: altera_avalon_packets_to_master File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_packets_to_master.v Line: 22
+    Info (12023): Found entity 2: packets_to_fifo File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_packets_to_master.v Line: 142
+    Info (12023): Found entity 3: fifo_buffer_single_clock_fifo File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_packets_to_master.v Line: 512
+    Info (12023): Found entity 4: fifo_buffer_scfifo_with_controls File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_packets_to_master.v Line: 573
+    Info (12023): Found entity 5: fifo_buffer File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_packets_to_master.v Line: 627
+    Info (12023): Found entity 6: fifo_to_packet File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_packets_to_master.v Line: 697
+    Info (12023): Found entity 7: packets_to_master File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_packets_to_master.v Line: 851
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_jtag_uart_sim_scfifo_w.sv
+    Info (12023): Found entity 1: altera_avalon_jtag_uart_sim_scfifo_w File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_jtag_uart_sim_scfifo_w.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_jtag_uart_sim_scfifo_r.sv
+    Info (12023): Found entity 1: altera_avalon_jtag_uart_sim_scfifo_r File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_jtag_uart_sim_scfifo_r.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_jtag_uart_scfifo_w.sv
+    Info (12023): Found entity 1: altera_avalon_jtag_uart_scfifo_w File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_jtag_uart_scfifo_w.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_jtag_uart_scfifo_r.sv
+    Info (12023): Found entity 1: altera_avalon_jtag_uart_scfifo_r File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_jtag_uart_scfifo_r.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_jtag_uart_log_module.sv
+    Info (12023): Found entity 1: altera_avalon_jtag_uart_log_module File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_jtag_uart_log_module.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altera_avalon_jtag_uart.sv
+    Info (12023): Found entity 1: altera_avalon_jtag_uart File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altera_avalon_jtag_uart.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/submodules/altdq_dqs2_acv_connect_to_hard_phy_cyclonev.sv
+    Info (12023): Found entity 1: altdq_dqs2_acv_connect_to_hard_phy_cyclonev File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/submodules/altdq_dqs2_acv_connect_to_hard_phy_cyclonev.sv Line: 19
+Info (12021): Found 1 design units, including 1 entities, in source file vga_driver.v
+    Info (12023): Found entity 1: vga_driver File: D:/HPS_V2/my_first_hps-fpga_base/vga_driver.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file unidade_de_controle.v
+    Info (12023): Found entity 1: unidade_de_controle File: D:/HPS_V2/my_first_hps-fpga_base/unidade_de_controle.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file rom_memoria2.v
+    Info (12023): Found entity 1: rom_memoria2 File: D:/HPS_V2/my_first_hps-fpga_base/rom_memoria2.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file rasterizador_poligonos.v
+    Info (12023): Found entity 1: rasterizador_poligonos File: D:/HPS_V2/my_first_hps-fpga_base/rasterizador_poligonos.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ram_tilemap_2port.v
+    Info (12023): Found entity 1: ram_tilemap_2port File: D:/HPS_V2/my_first_hps-fpga_base/ram_tilemap_2port.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file ram_tile.v
+    Info (12023): Found entity 1: ram_tile File: D:/HPS_V2/my_first_hps-fpga_base/ram_tile.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file paleta_rom.v
+    Info (12023): Found entity 1: paleta_rom File: D:/HPS_V2/my_first_hps-fpga_base/paleta_rom.v Line: 40
+Error (10134): Verilog HDL Module Declaration error at mvp_interface_bg.v(17): port "bg_scroll_x" is declared more than once File: D:/HPS_V2/my_first_hps-fpga_base/mvp_interface_bg.v Line: 17
+Error (10134): Verilog HDL Module Declaration error at mvp_interface_bg.v(18): port "bg_scroll_y" is declared more than once File: D:/HPS_V2/my_first_hps-fpga_base/mvp_interface_bg.v Line: 18
+Error (10134): Verilog HDL Module Declaration error at mvp_interface_bg.v(19): port "bg_color" is declared more than once File: D:/HPS_V2/my_first_hps-fpga_base/mvp_interface_bg.v Line: 19
+Error (10112): Ignored design unit "mvp_interface_bg" at mvp_interface_bg.v(1) due to previous errors File: D:/HPS_V2/my_first_hps-fpga_base/mvp_interface_bg.v Line: 1
+Info (12021): Found 0 design units, including 0 entities, in source file mvp_interface_bg.v
+Info (12021): Found 1 design units, including 1 entities, in source file motor_sprite.v
+    Info (12023): Found entity 1: motor_sprite File: D:/HPS_V2/my_first_hps-fpga_base/motor_sprite.v Line: 1
+Error (10170): Verilog HDL syntax error at gpu_top.v(35) near text: ")"; mismatched closing parenthesis . Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: D:/HPS_V2/my_first_hps-fpga_base/gpu_top.v Line: 35
+Error (10170): Verilog HDL syntax error at gpu_top.v(35) near text: ")";  expecting "endmodule". Check for and fix any syntax errors that appear immediately before or at the specified keyword. The Intel FPGA Knowledge Database contains many articles with specific details on how to resolve this error. Visit the Knowledge Database at https://www.altera.com/support/support-resources/knowledge-base/search.html and search for this specific error message number. File: D:/HPS_V2/my_first_hps-fpga_base/gpu_top.v Line: 35
+Error (10112): Ignored design unit "gpu_top" at gpu_top.v(1) due to previous errors File: D:/HPS_V2/my_first_hps-fpga_base/gpu_top.v Line: 1
+Info (12021): Found 0 design units, including 0 entities, in source file gpu_top.v
+Info (12021): Found 1 design units, including 1 entities, in source file background_renderer.v
+    Info (12023): Found entity 1: background_renderer File: D:/HPS_V2/my_first_hps-fpga_base/background_renderer.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file ip/altsource_probe/hps_reset.v
+    Info (12023): Found entity 1: hps_reset File: D:/HPS_V2/my_first_hps-fpga_base/ip/altsource_probe/hps_reset.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file ip/debounce/debounce.v
+    Info (12023): Found entity 1: debounce File: D:/HPS_V2/my_first_hps-fpga_base/ip/debounce/debounce.v Line: 13
+Info (12021): Found 1 design units, including 1 entities, in source file ip/edge_detect/altera_edge_detector.v
+    Info (12023): Found entity 1: altera_edge_detector File: D:/HPS_V2/my_first_hps-fpga_base/ip/edge_detect/altera_edge_detector.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file soc_system/synthesis/soc_system.v
+    Info (12023): Found entity 1: soc_system File: D:/HPS_V2/my_first_hps-fpga_base/soc_system/synthesis/soc_system.v Line: 6
+Info (12021): Found 1 design units, including 1 entities, in source file ghrd_top.v
+    Info (12023): Found entity 1: ghrd_top File: D:/HPS_V2/my_first_hps-fpga_base/ghrd_top.v Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file ram_framebuffer.v
+    Info (12023): Found entity 1: ram_framebuffer File: D:/HPS_V2/my_first_hps-fpga_base/ram_framebuffer.v Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file fifo_32bcomand.v
+    Info (12023): Found entity 1: fifo_32bcomand File: D:/HPS_V2/my_first_hps-fpga_base/fifo_32bcomand.v Line: 40
+Info (144001): Generated suppressed messages file D:/HPS_V2/my_first_hps-fpga_base/output_files/soc_system.map.smsg
+Error: Quartus Prime Analysis & Synthesis was unsuccessful. 7 errors, 1 warning
+    Error: Peak virtual memory: 4876 megabytes
+    Error: Processing ended: Mon Oct  5 20:15:43 2026
+    Error: Elapsed time: 00:02:50
+    Error: Total CPU time (on all processors): 00:02:53
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in D:/HPS_V2/my_first_hps-fpga_base/output_files/soc_system.map.smsg.
+
+
