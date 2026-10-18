@@ -228,7 +228,7 @@ O status (offset `0x04`) é formado diretamente pelas flags da FIFO: bit 0 = che
 
 O decodificador opera no clock de 50 MHz (o mesmo do Qsys); os motores gráficos, o compositor, a paleta e o VGA operam em `clk_25m`.
 
-**Mapeamento para os blocos exigidos no Problema #2:**
+**Mapeamento para os blocos:**
  
 | Bloco exigido | Implementação |
 | :--- | :--- |
@@ -440,9 +440,7 @@ A instrução de mudança de cor de background existe, mas ela não é utilizada
 Ao contrario dos Sprites, só é possivel desenhar 2 poligonos na tela, sendo eles um triangulo e um retângulo de tamanho fixo pré-definido.
 
 ### 8.4 Funcionalidades Não Atendidas
- 
-- Banco de registradores central, ULA dedicada e registrador de status independente: substituídos por registradores e aritmética distribuídos nos motores e pelas flags da FIFO (decisões de projeto descritas na seção 2).
-- Sinais *valid* / *busy* / *done* por instrução: apenas *busy* e *done* globais, derivados das flags da FIFO.
+A equipe conseguiu realizar todas as funcionalides citadas, havendo mudança em algumas por decisão de projeto, onde seus motivos foram explicados na sessão 2.
 ---
  
 ## 9. Referências
