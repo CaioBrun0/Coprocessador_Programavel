@@ -1,10 +1,10 @@
-Universidade Estadual de Feira de Santana (UEFS)
-Departamento de Tecnologia - Área de Eletrônica
-Disciplina: Sistemas Digitais (TEC499) - 2026.2
+**Universidade Estadual de Feira de Santana (UEFS)**  
+**Departamento de Tecnologia - Área de Eletrônica**  
+**Disciplina: Sistemas Digitais (TEC499) - 2026.2**  
+**Autores: Felipe Gomes, Mirela Mascarenhas e Caio Bruno Oliveira**
+---
 
 # Problema #2 — Coprocessador Gráfico Programável
-
-**Autores:** Felipe Gomes e Caio Bruno Oliveira
 
 ## Descrição do Projeto
 
