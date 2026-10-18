@@ -349,9 +349,46 @@ O endereço físico utilizado é `0xFF200000` (ponte Lightweight HPS-to-FPGA) + 
 <!-- Imagens do processo de compilação/gravação: inserir aqui -->
  
 ---
- 
-## 7. Testes e Funcionamento 
-(DESENVOLVER SOBRE TESTES)
+
+## 7. Testes e Funcionamento
+
+### 7.1 Estratégia de Verificação
+
+A verificação foi organizada em três níveis:
+
+| Nível | Objetivo |
+| :--- | :--- | 
+| Módulo | Validar cada unidade isoladamente (decodificador, motores gráficos, VGA) | 
+| Integração | Validar o fluxo completo: instrução na FIFO até o pixel de saída | 
+| Hardware | Validar o sistema real na DE1-SoC, com o ARM enviando instruções ao coprocessador | 
+
+### 7.2 Casos de Teste
+
+Cada caso está associado ao requisito que valida (seção 1). O critério de aceitação define o que deve ser observado para o teste ser considerado aprovado.
+
+| ID | Requisito | Procedimento | Critério de aceitação | Resultado |
+| :--- | :--- | :--- | :--- | :--- |
+| T01 | RF05, RF06 | Energizar a placa e não enviar instruções | Imagem estável, sem perda de sincronismo, com a FIFO vazia | Aprovado, imagem aparece na tela do monitor de forma estável |
+| T02 | RF01, RF02, RF08 | Enviar `BG_SCROLL` pelo menu Background | O fundo se desloca conforme o valor enviado | Aprovado, Desloca para todos lados e diagonal |
+| T03 | RF04 | Enviar scroll próximo de 320 (X) e 240 (Y) | O fundo reaparece do lado oposto (wrap-around) | Aprovado |
+| T04 | RF04 | Selecionar um sprite por ID e alterar a posição | Apenas o sprite selecionado se move | Aprovado, Seleciona pelo menu e move o sprite selecionado |
+| T05 | RF04 | Aplicar espelhamento horizontal e vertical | O sprite aparece espelhado nos eixos escolhidos | Aprovado |
+| T06 | RF04 | Sobrepor dois sprites no mesmo pixel | Prevalece o sprite de menor ID | Aprovado, o sprite selecionado sobrepõe o não selecionado |
+| T07 | RF04 | Enviar retângulo e triângulo pelo menu Polígonos | As duas primitivas aparecem preenchidas, com a cor definida | Aprovado, poligonos aparecem na tela |
+| T08 | RF05 | Sobrepor sprite, polígono e fundo | Ordem de camadas: sprite, polígono, fundo | Aprovado |
+| T09 | RF05 | Usar sprite com pixels de índice 0 sobre o fundo | As regiões de índice 0 deixam o fundo visível | [PREENCHER] |
+| T10 | RF08 | Executar a demonstração "tudo" (opção 4) | 32 sprites, retângulo e triângulo animados, com o fundo em scroll, sem artefatos | Aprovado, aparecem todos os elementos dos motores |
+| T11 | RF01 | Enviar instrução com `ENGINE` não definido | A instrução é ignorada e o sistema continua funcionando | [PREENCHER] |
+| T12 | RF05 | Enviar `PAL_RED_ADDR` + `PAL_GB_WRITE` | A cor associada ao índice muda imediatamente na tela | [PREENCHER] |
+
+### 7.3 Roteiro da Demonstração em Hardware
+
+1. Gravar `soc_system.sof` pelo Programmer e aguardar o Linux iniciar no HPS.
+2. Compilar o software (`make`) e executar `sudo ./gpu_cli`.
+3. Com o menu aberto e sem enviar instruções, verificar a imagem estável (T01).
+4. Executar os casos T02 a T09 pelos menus Background, Sprites e Polígonos.
+5. Executar a demonstração "tudo" (opção 4) e observar o comportamento por alguns segundos (T11).
+6. Usar o Reset da tela (opção 5) e verificar o retorno ao estado inicial.
 ---
  
 ## 8. Análise dos Resultados
@@ -374,15 +411,36 @@ O endereço físico utilizado é `0xFF200000` (ponte Lightweight HPS-to-FPGA) + 
 | Blocos DSP | 6 | 87 | 7% |
 | Pinos | 382 | 457 | 84% |
 | PLLs / DLLs | 0 / 1 | 6 / 4 | 0% / 25% |
- 
-### 8.3 Limitações e Melhorias Possíveis
 
-- Software: corrigir `gpu_wait_vblank()` (bit 2 de status inexistente) e usar `BG_COLOR` e as instruções de paleta na aplicação, para demonstrar a paleta programável.
+### 8.3 Timing
+
+A análise de timing foi realizada pelo Timing Analyzer do Quartus Prime (relatórios `output_files/soc_system.sta.rpt` e `.sta.summary`), com o clock de entrada de 50 MHz (`CLOCK_50`, período de 20 ns) restringido em `soc_system.sdc`. A tabela apresenta os resultados do modelo de pior caso (Slow 1100mV 85C).
+
+| Clock | Fmax | Slack de setup | Slack de hold |
+| :--- | :--- | :--- | :--- |
+| `clock_50_1` (CLOCK_50) | 91,67 MHz | +9,091 ns | +0,256 ns |
+| `altera_reserved_tck` (JTAG) | 76,38 MHz | +10,120 ns | +0,416 ns |
+| `afi_clk_write_clk` (SDRAM do HPS) | — | +1,730 ns | +0,143 ns |
+
+O slack de setup indica a folga entre o período do clock e o atraso do caminho mais lento; o slack de hold indica a folga contra mudanças prematuras do dado. Valores positivos significam que a restrição foi atendida.
+
+No clock principal do projeto (`clock_50_1`), o caminho crítico leva cerca de 10,9 ns dos 20 ns disponíveis, o que resulta em Fmax de 91,67 MHz, aproximadamente 83% acima da frequência de operação de 50 MHz. O clock `afi_clk_write_clk` pertence ao controlador de memória DDR do HPS e não ao coprocessador, por isso a Fmax não é comparada com o projeto. O clock `altera_reserved_tck` é o clock JTAG usado pelo programador.
+
+Todos os caminhos analisados de setup, hold, recovery e removal têm slack positivo e TNS = 0 no modelo de pior caso, ou seja, o projeto fecha timing a 50 MHz.
+
+**Limitação:** o clock de 25 MHz (`clk_25m`), usado pelos motores gráficos, pelo compositor e pelo VGA, é gerado por um divisor de registrador e não é declarado como clock gerado no SDC. Por isso o Timing Analyzer não o reporta como domínio separado, e a Fmax de 91,67 MHz refere-se ao domínio de 50 MHz. Como `clk_25m` é derivado de `CLOCK_50` por um divisor por 2, a folga observada indica que os caminhos desse domínio também têm margem. Mesmo assim, o correto é declará-lo no SDC com `create_generated_clock` (ou usar uma PLL) para que possa ser exibido na analise.
+### 8.4 Limitações e Melhorias Possíveis
+#### Melhorias:
+- Corrigir `gpu_wait_vblank()` (bit 2 de status inexistente) e usar `BG_COLOR`, as instruções de paleta na aplicação para demonstrar a paleta programável.
 - Controle de quadro com troca de bancos ativa (`bank_read` sincronizado com `fim_de_quadro`) para evitar artefatos, já que hoje as instruções são aplicadas assim que decodificadas.
 - Adicionar mais poligonos na tela, visto que só é possivel adicionar 1 poligono de cada.
 - Desenvolver uma aplicação para desenhar poligonos do tamanho que o usuário desejar.
-- Ajustar Driver Assembly, deixar ele 100% responsável pela montagem de instruções, remover o codigo C que auxilia na montagem.
- 
+- Ajustar o Driver Assembly para que seja integralmente responsável pela montagem das instruções, removendo o código em C que auxilia nesse processo, conforme orientação do tutor. Dessa forma, busca-se eliminar o vazamento de informações da ISA e corrigir o erro conceitual sinalizado.
+
+#### Limitações:
+A instrução de mudança de cor de background existe, mas ela não é utilizada pois a imagem de background fica fixa, dessa forma a demonstração da paleta programavel é feita mudando as cores dos poligonos.
+Ao contrario dos Sprites, só é possivel desenhar 2 poligonos na tela, sendo eles um triangulo e um retângulo de tamanho fixo pré-definido.
+
 ### 8.4 Funcionalidades Não Atendidas
  
 - Banco de registradores central, ULA dedicada e registrador de status independente: substituídos por registradores e aritmética distribuídos nos motores e pelas flags da FIFO (decisões de projeto descritas na seção 2).
