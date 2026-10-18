@@ -257,8 +257,8 @@ O decodificador opera no clock de 50 MHz (o mesmo do Qsys); os motores gráficos
  
 | Campo | Bits | Descrição |
 | :--- | :---: | :--- |
-| Reservado | 31 | Ignorado |
-| ENGINE | 30:27 | Unidade funcional destino |
+| Reservado | 31 | Ignorado, seria usado em caso de necessidade |
+| ENGINE | 30:27 | Motor de destino |
 | REG | 26:23 | Operação/registrador dentro da engine |
 | VALOR | 22:0 | Operando(s), conforme a instrução |
  
