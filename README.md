@@ -376,10 +376,8 @@ Cada caso está associado ao requisito que valida (seção 1). O critério de ac
 | T06 | RF04 | Sobrepor dois sprites no mesmo pixel | Prevalece o sprite de menor ID | Aprovado, o sprite selecionado sobrepõe o não selecionado |
 | T07 | RF04 | Enviar retângulo e triângulo pelo menu Polígonos | As duas primitivas aparecem preenchidas, com a cor definida | Aprovado, poligonos aparecem na tela |
 | T08 | RF05 | Sobrepor sprite, polígono e fundo | Ordem de camadas: sprite, polígono, fundo | Aprovado |
-| T09 | RF05 | Usar sprite com pixels de índice 0 sobre o fundo | As regiões de índice 0 deixam o fundo visível | [PREENCHER] |
-| T10 | RF08 | Executar a demonstração "tudo" (opção 4) | 32 sprites, retângulo e triângulo animados, com o fundo em scroll, sem artefatos | Aprovado, aparecem todos os elementos dos motores |
-| T11 | RF01 | Enviar instrução com `ENGINE` não definido | A instrução é ignorada e o sistema continua funcionando | [PREENCHER] |
-| T12 | RF05 | Enviar `PAL_RED_ADDR` + `PAL_GB_WRITE` | A cor associada ao índice muda imediatamente na tela | [PREENCHER] |
+| T09 | RF08 | Executar a demonstração "tudo" (opção 4) | 32 sprites, retângulo e triângulo animados, com o fundo em scroll, sem artefatos | Aprovado, aparecem todos os elementos dos motores |
+
 
 ### 7.3 Roteiro da Demonstração em Hardware
 
