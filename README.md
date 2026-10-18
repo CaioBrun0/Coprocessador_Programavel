@@ -66,8 +66,8 @@ Para cada requisito atendido são indicados o(s) módulo(s), como foi cumprido e
  
 **Como foi cumprido:** Foi definida uma ISA de 32 bits, em que cada instrução endereça uma unidade funcional (*engine*) e uma operação (*reg*) dentro dela. Todas as ações gráficas dinâmicas (scroll, cor de fundo, posição/padrão/flags de sprite, retângulo, triângulo e escrita na paleta) só acontecem como resultado da execução de uma instrução. A especificação completa está na seção 5.3.
  
-**Demonstração:** [PREENCHER: instruções executadas na apresentação e o efeito observado na tela.]
- 
+**Demonstração:** Execução interativa do binário `gpu_cli` na DE1-SoC, enviando instruções de movimentação, visibilidade, troca de cor e scroll pelo terminal, observando a atualização imediata na saída VGA. 
+
 ### RF02 / RF09 — Unidade de busca, IR e Unidade de Controle (busca assíncrona)
  
 **Módulos:** `gpu_top.v` (interface Avalon-MM e FIFO), `fifo_32bcomand` (IP `scfifo`, 256 × 32 bits), `mvp_interface_bg.v` (FSM).
@@ -81,8 +81,8 @@ Para cada requisito atendido são indicados o(s) módulo(s), como foi cumprido e
 | `READ_FIFO` | Captura a palavra no IR (`command_reg`) |
 | `EXECUTE` | Decodifica engine / reg / valor e atualiza o datapath |
 | `HOLD` | Estado de acomodação antes de retornar a `IDLE` |
- 
-**Demonstração:** [PREENCHER: fluxo ARM → FIFO → decodificador → motor gráfico mostrado na apresentação.]
+
+ **Demonstração:** Envio contínuo de pacotes de 32 bits em rajada durante o modo `demo_tudo` (~72 instruções por quadro a 60 FPS), demonstrando o enfileiramento na FIFO e a decodificação sem perda de pacotes.
  
 ### RF03 — Datapath
  
@@ -98,7 +98,7 @@ Para cada requisito atendido são indicados o(s) módulo(s), como foi cumprido e
  
 **Como foi cumprido:** O motor renderiza um tilemap de 40×30 posições com tiles 8×8 (256 padrões) e é acionado pelas instruções `BG_SCROLL` (deslocamento horizontal/vertical com repetição *wrap-around*) e `BG_COLOR` (cor sólida de fundo). O endereço do tilemap é `tile_y × 40 + tile_x`, calculado sem multiplicador.
  
-**Demonstração:** [PREENCHER: `BG_SCROLL` em ação na placa.]
+**Demonstração:** Acionamento do menu Background na placa para deslocar o cenário horizontalmente, verticalmente e na diagonal com efeito de *wrap-around* contínuo (320×240).
  
 #### Motor de Sprites
  
@@ -106,7 +106,7 @@ Para cada requisito atendido são indicados o(s) módulo(s), como foi cumprido e
  
 **Como foi cumprido:** O motor mantém uma OAM com atributos de 32 sprites 16×16 (X, Y, padrão, habilitação, espelhamento H e V), editada por instrução: `SPR_ID` seleciona o sprite e `SPR_POS`, `SPR_TILE` e `SPR_FLAGS` gravam seus atributos por pulsos de escrita seletivos. Cada sprite usa 4 subtiles 8×8, o espelhamento inverte as coordenadas dentro do sprite, e a detecção de hit é feita por varredura paralela dos 32 slots. Em sobreposição, vence o sprite de menor ID.
  
-**Demonstração:** [PREENCHER: sprites movidos pelo ID e espelhados na placa.]
+**Demonstração:** Seleção individual de sprites por ID (0 a 31) via menu para alterar coordenadas (X, Y), trocar o padrão gráfico (tile) e aplicar espelhamento horizontal/vertical.
  
 #### Rasterizador de Polígonos
  
@@ -114,7 +114,7 @@ Para cada requisito atendido são indicados o(s) módulo(s), como foi cumprido e
  
 **Como foi cumprido:** Retângulos (comparação de limites) e triângulos (funções de aresta com aritmética inteira, independente da ordem dos vértices, usando 6 blocos DSP) são configurados pelas instruções `RECT_*` e `TRI_*`.
  
-**Demonstração:** [PREENCHER: retângulo e triângulo na tela, cores e posições alteradas por instrução.]
+**Demonstração:** Renderização simultânea do retângulo e do triângulo via menu Polígonos, testando a translação de coordenadas, alteração de cor e alternância de visibilidade (mostrar/esconder).
  
 ### RF05 / RF06 — Unidade de Controle de Quadro, operação contínua e sincronização com o VGA
  
@@ -124,7 +124,7 @@ Para cada requisito atendido são indicados o(s) módulo(s), como foi cumprido e
  
 Um contador de power-on reset (255 ciclos) mantém o sistema em reset após a energização, garantindo saída estável na inicialização.
  
-**Demonstração:** [PREENCHER: imagem estável no monitor, mesmo sem instruções em execução.]
+**Demonstração:** Exibição contínua e estável do quadro no monitor VGA a 640×480 @ 60 Hz mesmo quando o programa em C aguarda entrada do usuário no menu (FIFO vazia).
  
 ### RF05 — Compositor (com paleta programável)
  
@@ -151,7 +151,7 @@ wire [7:0] final_pixel_index =
  
 O índice final de 8 bits é convertido em RGB 24 bits pela `paleta_ram` (256 entradas), reprogramável por instrução (`PAL_RED_ADDR` + `PAL_GB_WRITE`).
  
-**Demonstração:** [PREENCHER: sobreposição de camadas e alteração de paleta por instrução.]
+**Demonstração:** Validação visual da sobreposição de prioridades (Sprites sobre Polígonos e Polígonos sobre o Background) com recorte automático do índice 0 (transparente) e troca de índices da paleta.
  
 ### RF05 — Controlador VGA
  
@@ -178,7 +178,7 @@ O índice final de 8 bits é convertido em RGB 24 bits pela `paleta_ram` (256 en
  
 O software respeita o handshake *busy*: antes de cada escrita, o driver verifica a flag "FIFO cheia" e só envia quando há espaço.
  
-**Demonstração:** [PREENCHER: execução do `gpu_cli` na placa (menu, demo "tudo") e a imagem resultante.]
+**Demonstração:** Compilação e execução do `sudo ./gpu_cli` no Linux do HPS, navegando por todas as opções do menu interativo, executando a animação conjunta (`demo_tudo`) e acionando o reset geral da tela.
  
 ### RNF01 / RNF02 / RNF04 / RNF06 — Verilog, modularidade, entregas e relatório de síntese
  
