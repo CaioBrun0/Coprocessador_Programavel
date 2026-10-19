@@ -224,7 +224,7 @@ O status (offset `0x04`) é formado diretamente pelas flags da FIFO: bit 0 = che
  
 ### 5.1 Visão Geral
 
-(COLOCAR IMAGEM DO DRAW.IO)
+<img width="1600" height="382" alt="image" src="https://github.com/user-attachments/assets/c4fc41b7-6b46-4694-b300-a690e13b73c3" />
 
 O decodificador opera no clock de 50 MHz (o mesmo do Qsys); os motores gráficos, o compositor, a paleta e o VGA operam em `clk_25m`.
 
@@ -244,8 +244,19 @@ O decodificador opera no clock de 50 MHz (o mesmo do Qsys); os motores gráficos
 | Compositor | Bloco `final_pixel_index` + `paleta_ram` no `ghrd_top` |
 | Controlador VGA | `vga_driver` |
 
+### 5.2 Temporização VGA (640×480 @ ~60 Hz)
 
-### 5.2 ISA do Coprocessador
+O módulo `vga_driver.v` opera com clock de pixel de 25 MHz e utiliza os seguintes parâmetros padrão de varredura:
+
+| Parâmetro | Horizontal (pixels) | Vertical (linhas) |
+| :--- | :---: | :---: |
+| Região ativa (visível) | 640 | 480 |
+| Front Porch | 16 | 10 |
+| Pulso de Sincronismo (Sync) | 96 | 2 |
+| Back Porch | 48 | 33 |
+| **Total por quadro** | **800** | **525** |
+
+### 5.3 ISA do Coprocessador
  
 **Formato da instrução (32 bits):**
  
@@ -385,7 +396,7 @@ Cada caso está associado ao requisito que valida (seção 1). O critério de ac
 2. Compilar o software (`make`) e executar `sudo ./gpu_cli`.
 3. Com o menu aberto e sem enviar instruções, verificar a imagem estável (T01).
 4. Executar os casos T02 a T09 pelos menus Background, Sprites e Polígonos.
-5. Executar a demonstração "tudo" (opção 4) e observar o comportamento por alguns segundos (T11).
+5. Executar a demonstração "tudo" (opção 4) e observar o comportamento por alguns segundos (T09).
 6. Usar o Reset da tela (opção 5) e verificar o retorno ao estado inicial.
 ---
  
@@ -398,12 +409,13 @@ Cada caso está associado ao requisito que valida (seção 1). O critério de ac
 - **Pilha completa ARM → FPGA:** aplicação em C, driver em Assembly ARM com `mmap` de `/dev/mem` e handshake por *busy*, FIFO e decodificador em hardware.
 - **Operação contínua de vídeo:** VGA, controle de quadro e compositor independem da execução de instruções.
 - **Composição e paleta:** 5 níveis de prioridade com transparência pelo índice 0 e paleta de 256 cores programável por instrução.
+  
 ### 8.2 Utilização de Recursos (Cyclone V 5CSEMA5F31C6)
  
 | Recurso | Utilizado | Disponível | Percentual |
 | :--- | :--- | :--- | :--- |
-| ALMs (Lógica) | 3.755 | 32.070 | 12% |
-| Registradores | 5.002 | — | — |
+| ALMs (Lógica) | 3.761 | 32.070 | 12% |
+| Registradores | 4.998 | — | — |
 | Blocos de RAM (M10K) | 180 | 397 | 45% |
 | Bits de memória | 1.432.320 | 4.065.280 | 35% |
 | Blocos DSP | 6 | 87 | 7% |
@@ -427,20 +439,24 @@ No clock principal do projeto (`clock_50_1`), o caminho crítico leva cerca de 1
 Todos os caminhos analisados de setup, hold, recovery e removal têm slack positivo e TNS = 0 no modelo de pior caso, ou seja, o projeto fecha timing a 50 MHz.
 
 **Limitação:** o clock de 25 MHz (`clk_25m`), usado pelos motores gráficos, pelo compositor e pelo VGA, é gerado por um divisor de registrador e não é declarado como clock gerado no SDC. Por isso o Timing Analyzer não o reporta como domínio separado, e a Fmax de 91,67 MHz refere-se ao domínio de 50 MHz. Como `clk_25m` é derivado de `CLOCK_50` por um divisor por 2, a folga observada indica que os caminhos desse domínio também têm margem. Mesmo assim, o correto é declará-lo no SDC com `create_generated_clock` (ou usar uma PLL) para que possa ser exibido na analise.
+Mesmo assim, o correto é declará-lo no SDC com `create_generated_clock` (ou usar uma PLL) para que possa ser exibido na análise.
+
 ### 8.4 Limitações e Melhorias Possíveis
-#### Melhorias:
-- Corrigir `gpu_wait_vblank()` (bit 2 de status inexistente) e usar `BG_COLOR`, as instruções de paleta na aplicação para demonstrar a paleta programável.
-- Controle de quadro com troca de bancos ativa (`bank_read` sincronizado com `fim_de_quadro`) para evitar artefatos, já que hoje as instruções são aplicadas assim que decodificadas.
-- Adicionar mais poligonos na tela, visto que só é possivel adicionar 1 poligono de cada.
-- Desenvolver uma aplicação para desenhar poligonos do tamanho que o usuário desejar.
-- Ajustar o Driver Assembly para que seja integralmente responsável pela montagem das instruções, removendo o código em C que auxilia nesse processo, conforme orientação do tutor. Dessa forma, busca-se eliminar o vazamento de informações da ISA e corrigir o erro conceitual sinalizado.
 
-#### Limitações:
-A instrução de mudança de cor de background existe, mas ela não é utilizada pois a imagem de background fica fixa, dessa forma a demonstração da paleta programavel é feita mudando as cores dos poligonos.
-Ao contrario dos Sprites, só é possivel desenhar 2 poligonos na tela, sendo eles um triangulo e um retângulo de tamanho fixo pré-definido.
+#### Limitações Atuais:
+- **Quantidade e dimensão de polígonos:** Ao contrário dos sprites (que possuem 32 instâncias independentes na OAM), o rasterizador atual instancia apenas 2 primitivas simultâneas (um retângulo e um triângulo), e a aplicação em C manipula formas de dimensões pré-definidas.
+- **Exposição da Paleta e Cor de Fundo no Menu:** As instruções `BG_COLOR` (`0x1`) e de reprogramação da LUT da paleta (`PAL_RED_ADDR` e `PAL_GB_WRITE` na Engine `0x5`) estão implementadas e sintetizadas no decodificador em hardware (`mvp_interface_bg.v`), mas não foram expostas no menu interativo em C; na demonstração atual, a tabela da paleta é exercitada alternando dinamicamente os índices de cor dos polígonos (`RECT_STYLE` e `TRI_STYLE`).
+- **Sincronização de Quadro em Software:** O sinal físico `fim_de_quadro` é gerado em hardware, porém não foi mapeado no bit 2 do registrador de status (`offset 0x04`), de modo que a cadência de 60 FPS na aplicação em C é controlada via temporização de sistema (`usleep`).
 
-### 8.4 Funcionalidades Não Atendidas
-A equipe conseguiu realizar todas as funcionalides citadas, havendo mudança em algumas por decisão de projeto, onde seus motivos foram explicados na sessão 2.
+#### Melhorias Futuras:
+- Conectar o sinal de V-Blank ao bit 2 do registrador de status no `gpu_top.v` para habilitar o *polling* via `gpu_wait_vblank()`, e ativar o *Ping-Pong Buffer* (`bank_read_reg`) para atualização estritamente durante o intervalo vertical.
+- Expor no menu em C as chamadas para `BG_COLOR` e para a Engine `0x5` (edição dinâmica de RGB da paleta).
+- Expandir o módulo de polígonos para suportar múltiplas instâncias parametrizáveis pelo usuário.
+- Migrar a macro de empacotamento `GPU_CMD` do código C (`gpu.h`) para dentro do driver em Assembly (`gpu_driver.s`), encapsulando totalmente o formato binário da ISA na camada de baixo nível.
+
+### 8.5 Funcionalidades Não Atendidas
+
+Todos os requisitos arquiteturais e de integração hardware-software na placa DE1-SoC foram cumpridos, com as adaptações arquiteturais (como ULA e registradores distribuídos nos motores e busca passiva via FIFO/MMIO) devidamente justificadas na **Seção 2**. Quanto aos artefatos de verificação (RNF05), a validação do projeto concentrou-se nos testes funcionais e de integração diretamente em hardware real (casos T01 a T09 na placa), não sendo incluídos scripts de *testbench* para simulação isolada em RTL nesta entrega.
 ---
  
 ## 9. Referências
