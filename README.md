@@ -398,6 +398,22 @@ Cada caso está associado ao requisito que valida (seção 1). O critério de ac
 4. Executar os casos T02 a T09 pelos menus Background, Sprites e Polígonos.
 5. Executar a demonstração "tudo" (opção 4) e observar o comportamento por alguns segundos (T09).
 6. Usar o Reset da tela (opção 5) e verificar o retorno ao estado inicial.
+
+### 7.4 Resultados Visuais da Demonstração em Hardware
+
+Abaixo estão os registros visuais dos testes executados diretamente na placa DE1-SoC conectada ao monitor VGA:
+
+#### 1. Interface de Controle no Terminal (HPS Linux) e Estado Inicial (T01)
+<img width="292" height="207" alt="image" src="https://github.com/user-attachments/assets/6c7cd21a-d75c-4930-a0cc-51ad13a4f833" />
+
+<img width="775" height="577" alt="Design sem nome (14)" src="https://github.com/user-attachments/assets/a38110cd-4356-4b5e-a99f-da21e4275a2a" />
+
+#### 2. Teste de Polígonos e Cores da Paleta (T07)
+<img width="775" height="577" alt="Design sem nome (15)" src="https://github.com/user-attachments/assets/c6d7d3d1-d9ad-4f21-9424-8c504279dcc0" />
+
+#### 3. Teste de Sprites, Movimentação e Espelhamento (T04, T05, T06)
+<img width="775" height="577" alt="Design sem nome (16)" src="https://github.com/user-attachments/assets/22f1cf38-a504-4226-af6f-8f042b53f1a2" />
+
 ---
  
 ## 8. Análise dos Resultados
@@ -439,7 +455,6 @@ No clock principal do projeto (`clock_50_1`), o caminho crítico leva cerca de 1
 Todos os caminhos analisados de setup, hold, recovery e removal têm slack positivo e TNS = 0 no modelo de pior caso, ou seja, o projeto fecha timing a 50 MHz.
 
 **Limitação:** o clock de 25 MHz (`clk_25m`), usado pelos motores gráficos, pelo compositor e pelo VGA, é gerado por um divisor de registrador e não é declarado como clock gerado no SDC. Por isso o Timing Analyzer não o reporta como domínio separado, e a Fmax de 91,67 MHz refere-se ao domínio de 50 MHz. Como `clk_25m` é derivado de `CLOCK_50` por um divisor por 2, a folga observada indica que os caminhos desse domínio também têm margem. Mesmo assim, o correto é declará-lo no SDC com `create_generated_clock` (ou usar uma PLL) para que possa ser exibido na analise.
-Mesmo assim, o correto é declará-lo no SDC com `create_generated_clock` (ou usar uma PLL) para que possa ser exibido na análise.
 
 ### 8.4 Limitações e Melhorias Possíveis
 
@@ -456,8 +471,16 @@ Mesmo assim, o correto é declará-lo no SDC com `create_generated_clock` (ou us
 
 ### 8.5 Funcionalidades Não Atendidas
 
-Todos os requisitos arquiteturais e de integração hardware-software na placa DE1-SoC foram cumpridos, com as adaptações arquiteturais (como ULA e registradores distribuídos nos motores e busca passiva via FIFO/MMIO) devidamente justificadas na **Seção 2**. Quanto aos artefatos de verificação (RNF05), a validação do projeto concentrou-se nos testes funcionais e de integração diretamente em hardware real (casos T01 a T09 na placa), não sendo incluídos scripts de *testbench* para simulação isolada em RTL nesta entrega.
----
+Os itens abaixo diferem do que o enunciado do Problema #2 exige ou sugere:
+
+| Item do enunciado | Situação | Justificativa |
+| :--- | :---: | :--- |
+| Banco de registradores (obrigatório, 4.1) | Não atendido | Registradores distribuídos por motor (OAM, rascunhos, scroll, paleta); o campo `REG` endereça diretamente o registrador dentro de cada engine. |
+| ULA (3.1) | Não atendido | A aritmética é feita dentro dos motores que a utilizam; a ISA não possui instruções aritméticas. |
+| Registrador de status (obrigatório, 4.1) | Parcial | O status é formado apenas pelas flags da FIFO (cheia/vazia); não há status de execução ou de erro. |
+| Comunicação valid / busy / done | Parcial | `valid` = escrita na FIFO, `busy` = FIFO cheia, `done` = FIFO vazia; não há `done` por instrução. |
+| Programa em Assembly da ISA e sintaxe (4.2) | Não atendido | A ISA é programada por uma aplicação em C sobre driver em Assembly ARM; não há montador textual. |
+| Mecanismo de sincronização com o VGA (4.1) | Parcial | O pulso `fim_de_quadro` é gerado e exportado; a troca de bancos (ping-pong) está desativada e as instruções são aplicadas assim que decodificadas. [confirme se ainda é o caso] |
  
 ## 9. Referências
  
