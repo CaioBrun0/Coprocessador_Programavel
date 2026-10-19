@@ -356,9 +356,7 @@ Correspondência entre as instruções da ISA e o software (os mnemônicos são 
 3. Execute com privilégios de superusuário, pois o driver acessa `/dev/mem`: `sudo ./gpu_cli`.
 4. Use o menu: **[1]** Polígonos, **[2]** Sprites, **[3]** Background, **[4]** Demonstração "tudo" (Enter para parar), **[5]** Reset da tela, **[0]** Sair.
 O endereço físico utilizado é `0xFF200000` (ponte Lightweight HPS-to-FPGA) + offset `0x0` do `gpu_top_0`, configurado no início de `gpu_driver.s`.
- 
-<!-- Imagens do processo de compilação/gravação: inserir aqui -->
- 
+  
 ---
 
 ## 7. Testes e Funcionamento
@@ -475,11 +473,10 @@ Os itens abaixo diferem do que o enunciado do Problema #2 exige ou sugere:
 
 | Item do enunciado | Situação | Justificativa |
 | :--- | :---: | :--- |
-| Banco de registradores (obrigatório, 4.1) | Não atendido | Registradores distribuídos por motor (OAM, rascunhos, scroll, paleta); o campo `REG` endereça diretamente o registrador dentro de cada engine. |
-| ULA (3.1) | Não atendido | A aritmética é feita dentro dos motores que a utilizam; a ISA não possui instruções aritméticas. |
+| Banco de registradores (obrigatório, 4.1) | Parcial | Registradores distribuídos por motor (OAM, rascunhos, scroll, paleta); o campo `REG` endereça diretamente o registrador dentro de cada engine. |
+| ULA (3.1) | Parcial | A aritmética é feita dentro dos motores que a utilizam; a ISA não possui instruções aritméticas. |
 | Registrador de status (obrigatório, 4.1) | Parcial | O status é formado apenas pelas flags da FIFO (cheia/vazia); não há status de execução ou de erro. |
 | Comunicação valid / busy / done | Parcial | `valid` = escrita na FIFO, `busy` = FIFO cheia, `done` = FIFO vazia; não há `done` por instrução. |
-| Programa em Assembly da ISA e sintaxe (4.2) | Não atendido | A ISA é programada por uma aplicação em C sobre driver em Assembly ARM; não há montador textual. |
 | Mecanismo de sincronização com o VGA (4.1) | Parcial | O pulso `fim_de_quadro` é gerado e exportado; a troca de bancos (ping-pong) está desativada e as instruções são aplicadas assim que decodificadas. [confirme se ainda é o caso] |
  
 ## 9. Referências
