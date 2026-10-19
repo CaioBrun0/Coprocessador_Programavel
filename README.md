@@ -477,7 +477,7 @@ Os itens abaixo diferem do que o enunciado do Problema #2 exige ou sugere:
 | ULA (3.1) | Parcial | A aritmética é feita dentro dos motores que a utilizam; a ISA não possui instruções aritméticas. |
 | Registrador de status (obrigatório, 4.1) | Parcial | O status é formado apenas pelas flags da FIFO (cheia/vazia); não há status de execução ou de erro. |
 | Comunicação valid / busy / done | Parcial | `valid` = escrita na FIFO, `busy` = FIFO cheia, `done` = FIFO vazia; não há `done` por instrução. |
-| Mecanismo de sincronização com o VGA (4.1) | Parcial | O pulso `fim_de_quadro` é gerado e exportado; a troca de bancos (ping-pong) está desativada e as instruções são aplicadas assim que decodificadas. [confirme se ainda é o caso] |
+| Mecanismo de sincronização com o VGA (4.1) | Parcial | O pulso `fim_de_quadro` é gerado e exportado; a troca de bancos (ping-pong) está desativada e as instruções são aplicadas assim que decodificadas.|
  
 ## 9. Referências
  
